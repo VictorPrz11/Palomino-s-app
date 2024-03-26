@@ -28,8 +28,15 @@ class CamposdeTexto extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "Ingrese el valor";
+            }
+            return null;
+          },
           controller: controller,
           decoration: InputDecoration(
+            hintText: "Nombre",
             labelText: label,
             border: const OutlineInputBorder(),
           ),

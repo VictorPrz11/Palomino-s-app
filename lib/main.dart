@@ -6,6 +6,7 @@ import 'package:provider/provider.dart'; // new
 import 'PantallaPrincipal.dart';
 import 'app_state.dart';
 import 'inicio_sesion.dart'; // new
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -98,6 +99,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: ThemeData(
+        textTheme: GoogleFonts.robotoTextTheme(
+          Theme.of(context).textTheme,
+        ),
         buttonTheme: Theme.of(context).buttonTheme.copyWith(
               highlightColor: Colors.black,
             ),

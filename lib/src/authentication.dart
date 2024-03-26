@@ -40,9 +40,8 @@ class AuthFunc extends StatelessWidget {
         Center(
           child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  fixedSize: Size(200, 50),
-                  textStyle:
-                      const TextStyle(fontSize: 22, color: Colors.black)),
+                fixedSize: Size(200, 50),
+              ),
               onPressed: () {
                 !loggedIn ? context.push('/sign-in') : signOut();
               },

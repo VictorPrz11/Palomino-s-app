@@ -15,14 +15,16 @@ class CrudPlatillos extends StatefulWidget {
 }
 
 class _CrudPlatillosState extends State<CrudPlatillos> {
-  TextEditingController _nombre = TextEditingController();
-  TextEditingController _precio = TextEditingController();
-  TextEditingController _descripcion = TextEditingController();
-  TextEditingController _categoria = TextEditingController();
+  final _formkey = GlobalKey<FormState>(debugLabel: "_CrudPlatillosState");
+  final TextEditingController _nombre = TextEditingController();
+  final TextEditingController _precio = TextEditingController();
+  final TextEditingController _descripcion = TextEditingController();
+  final TextEditingController _categoria = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formkey,
       child: Column(
         children: <Widget>[
           CamposdeTexto(
@@ -46,14 +48,14 @@ class _CrudPlatillosState extends State<CrudPlatillos> {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    if (_nombre.text.isEmpty ||
-                        _precio.text.isEmpty ||
-                        _descripcion.text.isEmpty ||
-                        _categoria.text.isEmpty) {
-                      return;
-                    } else {
+                    if (_formkey.currentState!.validate()) {
                       widget.platillo(_nombre.text, _precio.text,
                           _descripcion.text, _categoria.text);
+                      _categoria.clear();
+                      _descripcion.clear();
+                      _nombre.clear();
+                      _precio.clear();
+                      Navigator.pop(context);
                     }
                   },
                   child: const Text('Guardar'),

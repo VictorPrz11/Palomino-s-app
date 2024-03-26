@@ -11,7 +11,7 @@ class PantallaPrincipal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.restaurant),
+        leading: const Icon(Icons.restaurant_menu),
         leadingWidth: 100,
         backgroundColor: Colors.blue[200],
         title: const Text('Palomino´s'),
@@ -31,12 +31,14 @@ class PantallaPrincipal extends StatelessWidget {
                       child: Card(
                         margin: EdgeInsets.all(10),
                         child: ListTile(
-                            title: Column(children: [
-                          Image.asset('assets/knife.png'),
-                          Text(
-                            'Platillos',
-                          )
-                        ])),
+                            title: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                              Image.asset('assets/knife.png'),
+                              Text(
+                                'Platillos',
+                              )
+                            ])),
                       ),
                     ))),
             Expanded(
@@ -50,12 +52,14 @@ class PantallaPrincipal extends StatelessWidget {
                       child: Card(
                         margin: EdgeInsets.all(10),
                         child: ListTile(
-                            title: Column(children: [
-                          Image.asset('assets/ventas.png'),
-                          Text(
-                            'Ventas',
-                          )
-                        ])),
+                            title: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                              Image.asset('assets/ventas.png'),
+                              Text(
+                                'Ventas',
+                              )
+                            ])),
                       ),
                     ))),
           ])),
@@ -72,15 +76,18 @@ class PantallaPrincipal extends StatelessWidget {
                       child: Card(
                         margin: EdgeInsets.all(10),
                         child: ListTile(
-                            title: Column(children: [
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.15,
-                            child: Image.asset('assets/report.png'),
-                          ),
-                          Text(
-                            'Reportes',
-                          )
-                        ])),
+                            title: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
+                                child: Image.asset('assets/report.png'),
+                              ),
+                              Text(
+                                'Reportes',
+                              )
+                            ])),
                       ),
                     ))),
           ]))
