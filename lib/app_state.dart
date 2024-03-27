@@ -10,24 +10,6 @@ class ApplicationState extends ChangeNotifier {
   ApplicationState() {
     init();
   }
-  Future<DocumentReference> addPlatillo(
-      String nombre, String precio, String descripcion, String categoria) {
-    if (!_loggedIn) {
-      throw Exception('Debes iniciar sesión para agregar un platillo');
-    }
-
-    return FirebaseFirestore.instance
-        .collection('platillos')
-        .add(<String, dynamic>{
-      'descripcion': descripcion,
-      'nombre': nombre,
-      'precio': precio,
-      'categoria': categoria,
-      'fecha': DateTime.now(),
-      'name': FirebaseAuth.instance.currentUser!.displayName,
-      'userId': FirebaseAuth.instance.currentUser!.uid,
-    });
-  }
 
   bool _loggedIn = false;
   bool get loggedIn => _loggedIn;

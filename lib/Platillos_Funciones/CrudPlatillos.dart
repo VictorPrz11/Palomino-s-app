@@ -1,15 +1,17 @@
 import "dart:async";
-
 import "package:flutter/material.dart";
+import "package:flutter/widgets.dart";
+import "package:palominos/Platillos_Funciones/LecturaDePlatillos.dart";
 import "package:palominos/src/widgets.dart";
+import '../app_state.dart';
 
 class CrudPlatillos extends StatefulWidget {
-  const CrudPlatillos({super.key, required this.platillo});
-
-  final FutureOr<void> Function(
-          String nombre, String precio, String descripcion, String categoria)
-      platillo;
-
+  CrudPlatillos(this.categoria, this.descripcion, this.precio, this.nombre,
+      {super.key});
+  String categoria;
+  String descripcion;
+  String precio;
+  String nombre;
   @override
   State<CrudPlatillos> createState() => _CrudPlatillosState();
 }
@@ -23,48 +25,51 @@ class _CrudPlatillosState extends State<CrudPlatillos> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formkey,
-      child: Column(
-        children: <Widget>[
-          CamposdeTexto(
-            "Nombre",
-            _nombre,
-          ),
-          CamposdeTexto(
-            "Precio",
-            _precio,
-          ),
-          CamposdeTexto(
-            "Descripcion",
-            _descripcion,
-          ),
-          CamposdeTexto(
-            "Categoria",
-            _categoria,
-          ),
-          Row(
+    _nombre.text = widget.nombre;
+    _precio.text = widget.precio;
+    _descripcion.text = widget.descripcion;
+    _categoria.text = widget.categoria;
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Agregar Platillo'),
+      ),
+      body: Form(
+          key: _formkey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(
-                child: ElevatedButton(
+              CamposdeTexto("Nombre", _nombre, "Nombre"),
+              CamposdeTexto("Precio", _precio, "Precio"),
+              CamposdeTexto("Descripcion", _descripcion, "Descripcion"),
+              CamposdeTexto("Categoria", _categoria, "Categoria"),
+              SizedBox(
+                // margin: const EdgeInsets.all(10),
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: FilledButton.tonal(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue[200],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      )),
                   onPressed: () {
                     if (_formkey.currentState!.validate()) {
-                      widget.platillo(_nombre.text, _precio.text,
-                          _descripcion.text, _categoria.text);
-                      _categoria.clear();
-                      _descripcion.clear();
-                      _nombre.clear();
-                      _precio.clear();
-                      Navigator.pop(context);
+                      Navigator.pop(context, {
+                        'nombre': _nombre.text,
+                        'precio': _precio.text,
+                        'descripcion': _descripcion.text,
+                        'categoria': _categoria.text
+                      });
                     }
                   },
-                  child: const Text('Guardar'),
+                  child: const Text(
+                    'Guardar',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
                 ),
               )
             ],
-          )
-        ],
-      ),
+          )),
     );
   }
 }

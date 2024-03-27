@@ -102,9 +102,6 @@ class MainApp extends StatelessWidget {
         textTheme: GoogleFonts.robotoTextTheme(
           Theme.of(context).textTheme,
         ),
-        buttonTheme: Theme.of(context).buttonTheme.copyWith(
-              highlightColor: Colors.black,
-            ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         useMaterial3: true,
       ),

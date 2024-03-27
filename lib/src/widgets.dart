@@ -19,8 +19,8 @@ class Header extends StatelessWidget {
 }
 
 class CamposdeTexto extends StatelessWidget {
-  const CamposdeTexto(this.label, this.controller, {super.key});
-
+  const CamposdeTexto(this.label, this.controller, this.label2, {super.key});
+  final String label2;
   final String label;
   final TextEditingController controller;
 
@@ -36,7 +36,7 @@ class CamposdeTexto extends StatelessWidget {
           },
           controller: controller,
           decoration: InputDecoration(
-            hintText: "Nombre",
+            hintText: label2,
             labelText: label,
             border: const OutlineInputBorder(),
           ),
