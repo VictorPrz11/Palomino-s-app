@@ -10,13 +10,17 @@ dependencies:
   cloud_firestore: ^4.15.9
   firebase_auth: ^4.17.9
   firebase_core: ^2.27.1
+  firebase_storage: ^11.6.11
   firebase_ui_auth: ^1.13.1
   flutter:
     sdk: flutter
   go_router: ^13.2.1
   google_fonts: ^6.2.1
   hexcolor: ^3.0.1
-  provider: ^6.1.2
+  image_picker: ^1.0.7
+  provider: ^6.1.2 
+
+
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:flutter/material.dart";
+import "package:flutter/widgets.dart";
 import "package:palominos/Platillos_Funciones/CrudPlatillos.dart";
 
 import "LecturaDePlatillos.dart";
@@ -53,19 +54,37 @@ class _PlatillosState extends State<Platillos> {
             }
 
             return ListView(
+              padding: const EdgeInsets.all(8),
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
                 Map<String, dynamic> data =
                     document.data() as Map<String, dynamic>;
-                return SizedBox(
-                    height: 150,
-                    child: Card(
-                        child: Row(
+                return Card(
+                    child: Column(
+                  children: [
+                    ListTile(
+                        contentPadding:
+                            const EdgeInsets.fromLTRB(15, 10, 25, 0),
+                        subtitle: Text("\$" + data["precio"]),
+                        title: Text(
+                          data["nombre"],
+                        ),
+                        // minVerticalPadding: 30,
+                        // onTap: () {},
+                        isThreeLine: true,
+                        // tileColor: Colors.grey[200],
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
+                        leading: ClipRRect(
+                          // borderRadius: BorderRadius.circular(20),
+                          child: Image.asset(
+                            "assets/Palominos.png",
+                          ),
+                        ),
+                        titleAlignment: ListTileTitleAlignment.center),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Expanded(
-                            child: ListTile(
-                          title: Text(data["nombre"]),
-                          subtitle: Text("\$" + data["precio"]),
-                        )),
                         IconButton(
                             onPressed: () {
                               Navigator.push(
@@ -86,39 +105,43 @@ class _PlatillosState extends State<Platillos> {
                             },
                             icon: const Icon(Icons.edit)),
                         IconButton(
-                          icon: const Icon(Icons.delete),
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: const Text("Confirmar Eliminación"),
-                                  content: const Text(
-                                      "¿Estás seguro de que quieres eliminar este platillo?"),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: const Text("Cancelar"),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: const Text("Eliminar"),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                        eliminarPlatillo(data["nombre"]);
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            ).then((value) {
-                              setState(() {});
-                            });
-                          },
-                        )
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text("Confirmar Eliminación"),
+                                    content: const Text(
+                                        "¿Estás seguro de que quieres eliminar este platillo?"),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: const Text("Cancelar"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: const Text("Eliminar"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          eliminarPlatillo(data["nombre"]);
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ).then((value) {
+                                setState(() {});
+                              });
+                            },
+                            icon: const Icon(Icons.delete))
                       ],
-                    )));
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    )
+                  ],
+                ));
               }).toList(),
             );
           },

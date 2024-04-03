@@ -1,7 +1,8 @@
 import "package:flutter/material.dart";
+import "package:image_picker/image_picker.dart";
 import "package:palominos/Reportes.dart";
 import "package:palominos/Ventas.dart";
-
+import "package:palominos/seleccionDdeimagenes.dart";
 import "Platillos_Funciones/Platillos.dart";
 
 class PantallaPrincipal extends StatelessWidget {

@@ -1,17 +1,23 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
+import "package:palominos/Platillos_Funciones/Clase_Platillo.dart";
 
 FirebaseFirestore bdPlatillos = FirebaseFirestore.instance;
+CollectionReference platillosCollection = bdPlatillos.collection('platillos');
+CollectionReference pedidosCollection = bdPlatillos.collection('pedidos');
 
-Future<List> leerPlatillos() async {
-  List platillos = [];
-  CollectionReference platillosCollection = bdPlatillos.collection('platillos');
-  QuerySnapshot platillosObtenidos = await platillosCollection.get();
-
-  platillosObtenidos.docs.forEach((platillo) {
-    platillos.add(platillo.data());
+void agregarPedido(Map pedido, double total) async {
+  pedidosCollection.add({
+    'Pedido': pedido,
+    'total': total,
+    'fecha': DateTime.now(),
+    'name': FirebaseAuth.instance.currentUser!.displayName,
+    'userId': FirebaseAuth.instance.currentUser!.uid,
+  }).then((value) {
+    print("Pedido agregado correctamente.");
+  }).catchError((e) {
+    print("Error al agregar pedido: $e");
   });
-  return platillos;
 }
 
 void eliminarPlatillo(String nombre) async {
@@ -52,5 +58,23 @@ actualizarPlatillo(nombre, precio, descripcion, categoria) {
       })
       .then((value) => print("Platillo actualizado correctamente."))
       .catchError((error) => print("Fallo al actualizar el platillo: $error"));
-  ;
+}
+
+elementos() {
+  List lista = [];
+  Platilloclass platillo = Platilloclass(
+      id: "", nombre: "", precio: "", descripcion: "", categoria: "");
+  platillosCollection.get().then((snapshot) {
+    snapshot.docs.forEach((element) {
+      platillo = Platilloclass(
+        id: element.id,
+        nombre: element['nombre'],
+        precio: element['precio'],
+        descripcion: element['descripcion'],
+        categoria: element['categoria'],
+      );
+      lista.add(platillo);
+    });
+  });
+  return lista;
 }
