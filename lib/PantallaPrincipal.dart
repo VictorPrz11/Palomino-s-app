@@ -1,9 +1,12 @@
+import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
+import "package:flutter/widgets.dart";
 import "package:image_picker/image_picker.dart";
+import "package:palominos/Pedidos_Funciones/Pantalla_pedidos.dart";
 import "package:palominos/Reportes.dart";
 import "package:palominos/Ventas.dart";
 import "package:palominos/seleccionDdeimagenes.dart";
-import "Platillos_Funciones/Platillos.dart";
+import "Platillos_Funciones/Pantalla_Platillos.dart";
 
 class PantallaPrincipal extends StatelessWidget {
   const PantallaPrincipal({super.key});
@@ -27,16 +30,16 @@ class PantallaPrincipal extends StatelessWidget {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => Platillos()));
                     },
-                    child: Container(
+                    child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.25,
                       child: Card(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: ListTile(
                             title: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                               Image.asset('assets/knife.png'),
-                              Text(
+                              const Text(
                                 'Platillos',
                               )
                             ])),
@@ -45,47 +48,51 @@ class PantallaPrincipal extends StatelessWidget {
             Expanded(
                 child: InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Ventas()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ScPedidos()));
                     },
-                    child: Container(
+                    child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.25,
                       child: Card(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: ListTile(
                             title: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                               Image.asset('assets/ventas.png'),
-                              Text(
+                              const Text(
                                 'Ventas',
                               )
                             ])),
                       ),
                     ))),
           ])),
-          Container(
+          SizedBox(
               child: Row(children: [
             Expanded(
                 child: InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Reportes()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Reportes()));
                     },
-                    child: Container(
+                    child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.25,
                       child: Card(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: ListTile(
                             title: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                              Container(
+                              SizedBox(
                                 height:
                                     MediaQuery.of(context).size.height * 0.15,
                                 child: Image.asset('assets/report.png'),
                               ),
-                              Text(
+                              const Text(
                                 'Reportes',
                               )
                             ])),
