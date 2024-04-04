@@ -3,7 +3,7 @@ import "package:flutter/material.dart";
 
 import "package:palominos/Platillos_Funciones/CrudPlatillos.dart";
 
-import "LecturaDePlatillos.dart";
+import "../src/Funciones_BD.dart";
 
 class Platillos extends StatefulWidget {
   const Platillos({super.key});
@@ -75,12 +75,12 @@ class _PlatillosState extends State<Platillos> {
                         shape: const RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
-                        leading: ClipRRect(
-                          // borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            "assets/Palominos.png",
-                          ),
-                        ),
+                        // leading: ClipRRect(
+                        //   // borderRadius: BorderRadius.circular(20),
+                        //   child: Image.asset(
+                        //     "assets/Palominos.png",
+                        //   ),
+                        // ),
                         titleAlignment: ListTileTitleAlignment.center),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,

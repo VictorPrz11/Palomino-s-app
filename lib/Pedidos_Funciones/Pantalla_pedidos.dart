@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:palominos/Ventas.dart';
+import 'package:palominos/Pedidos_Funciones/Ventas.dart';
+import 'package:palominos/src/Funciones_BD.dart';
 
 import 'Clase_Pedido.dart';
 
@@ -52,34 +53,50 @@ class _ScPedidosState extends State<ScPedidos> {
               Map<String, dynamic> data =
                   document.data() as Map<String, dynamic>;
               Map<String, dynamic> pedido = data['Pedido'];
+              Timestamp timestamp = data['fecha'] as Timestamp;
+              DateTime dateTime = timestamp.toDate();
+              var _horaPedido =
+                  'Fecha: ${dateTime.day}/${dateTime.month}/${dateTime.year} Hora: ${dateTime.hour}:${dateTime.minute}:${dateTime.second}';
 
               return Card(
                   child: Column(
                 children: [
                   ListTile(
-                    title: Text(pedido.entries
-                        .map((e) =>
-                            '${e.key}\ncantidad: ${e.value['cantidad'].toString()}, precio: ${e.value['precio'].toString()}, descripcion: ${e.value['descripcion']} \n')
-                        .join('\n')),
+                    title: Text(_horaPedido +
+                        '\n' +
+                        pedido.entries
+                            .map((e) =>
+                                '${e.key}  \ncantidad: ${e.value['cantidad'].toString()}, precio: ${e.value['precio'].toString()}, descripcion: ${e.value['descripcion']} \n')
+                            .join('\n')),
                     subtitle: Text('Total: \$${data['total'].toString()}'),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      ElevatedButton(
-                          onPressed: () {},
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Pedido realizado'),
-                            ],
-                          )),
                       IconButton(
                           onPressed: () {
                             document.reference.delete();
                             setState(() {});
                           },
-                          icon: const Icon(Icons.delete))
+                          icon: const Icon(Icons.delete)),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green),
+                          onPressed: () {
+                            agregarVenta(data['Pedido'], data['total']);
+                            document.reference.delete();
+                          },
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Pedido realizado',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              SizedBox(width: 10),
+                              Icon(Icons.send, color: Colors.white)
+                            ],
+                          )),
                     ],
                   )
                 ],

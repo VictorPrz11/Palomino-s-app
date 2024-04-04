@@ -3,9 +3,9 @@ import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
 import "package:palominos/Platillos_Funciones/Clase_Platillo.dart";
 
-import "package:palominos/Platillos_Funciones/LecturaDePlatillos.dart";
+import "package:palominos/src/Funciones_BD.dart";
 
-import "Pedidos_Funciones/Clase_Pedido.dart";
+import "Clase_Pedido.dart";
 
 class Ventas extends StatefulWidget {
   const Ventas({super.key});

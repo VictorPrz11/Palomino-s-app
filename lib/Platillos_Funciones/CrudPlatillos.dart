@@ -1,7 +1,7 @@
 import "dart:async";
 import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
-import "package:palominos/Platillos_Funciones/LecturaDePlatillos.dart";
+import "package:palominos/src/Funciones_BD.dart";
 import "package:palominos/src/widgets.dart";
 import '../app_state.dart';
 

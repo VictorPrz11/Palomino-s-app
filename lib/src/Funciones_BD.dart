@@ -5,6 +5,21 @@ import "package:palominos/Platillos_Funciones/Clase_Platillo.dart";
 FirebaseFirestore bdPlatillos = FirebaseFirestore.instance;
 CollectionReference platillosCollection = bdPlatillos.collection('platillos');
 CollectionReference pedidosCollection = bdPlatillos.collection('pedidos');
+CollectionReference ventasCollection = bdPlatillos.collection('ventas');
+
+void agregarVenta(Map venta, double total) async {
+  ventasCollection.add({
+    'Venta': venta,
+    'total': total,
+    'fecha': DateTime.now(),
+    'name': FirebaseAuth.instance.currentUser!.displayName,
+    'userId': FirebaseAuth.instance.currentUser!.uid,
+  }).then((value) {
+    print("Venta agregada correctamente.");
+  }).catchError((e) {
+    print("Error al agregar venta: $e");
+  });
+}
 
 void agregarPedido(Map pedido, double total) async {
   pedidosCollection.add({

@@ -3,8 +3,9 @@ import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
 import "package:image_picker/image_picker.dart";
 import "package:palominos/Pedidos_Funciones/Pantalla_pedidos.dart";
-import "package:palominos/Reportes.dart";
-import "package:palominos/Ventas.dart";
+import "package:palominos/Reporte_funciones/Pantalla_Reportes.dart";
+
+import "package:palominos/Pedidos_Funciones/Ventas.dart";
 import "package:palominos/seleccionDdeimagenes.dart";
 import "Platillos_Funciones/Pantalla_Platillos.dart";
 
@@ -77,7 +78,7 @@ class PantallaPrincipal extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Reportes()));
+                              builder: (context) => const ScReportes()));
                     },
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.25,
