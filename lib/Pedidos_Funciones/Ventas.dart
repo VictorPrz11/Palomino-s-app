@@ -1,10 +1,6 @@
-import "package:cloud_firestore/cloud_firestore.dart";
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
-import "package:palominos/Platillos_Funciones/Clase_Platillo.dart";
 
 import "package:palominos/src/Funciones_BD.dart";
-
 import "Clase_Pedido.dart";
 
 class Ventas extends StatefulWidget {
@@ -97,11 +93,11 @@ class _VentasState extends State<Ventas> {
                       onPressed: () {
                         e.descripcion = descripcionController.text;
                       },
-                      icon: Icon(Icons.check_box)),
+                      icon: const Icon(Icons.check_box)),
                   Expanded(
                     child: TextFormField(
                         controller: descripcionController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Descripción',
                         )),
@@ -121,7 +117,6 @@ class _VentasState extends State<Ventas> {
                   IconButton(
                       onPressed: () {
                         setState(() {
-                          print(descripcionController.text);
                           e.cantidad++;
                           total = total + double.parse(e.precio);
                         });

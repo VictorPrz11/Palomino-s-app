@@ -62,25 +62,16 @@ class _PlatillosState extends State<Platillos> {
                     child: Column(
                   children: [
                     ListTile(
-                        contentPadding:
-                            const EdgeInsets.fromLTRB(15, 10, 25, 0),
+                        // contentPadding:
+                        //     const EdgeInsets.fromLTRB(15, 10, 25, 0),
                         subtitle: Text("\$" + data["precio"]),
                         title: Text(
                           data["nombre"],
                         ),
-                        // minVerticalPadding: 30,
-                        // onTap: () {},
-                        isThreeLine: true,
-                        // tileColor: Colors.grey[200],
+                        // isThreeLine: true,
                         shape: const RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
-                        // leading: ClipRRect(
-                        //   // borderRadius: BorderRadius.circular(20),
-                        //   child: Image.asset(
-                        //     "assets/Palominos.png",
-                        //   ),
-                        // ),
                         titleAlignment: ListTileTitleAlignment.center),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,

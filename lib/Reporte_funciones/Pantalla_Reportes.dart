@@ -10,8 +10,10 @@ class ScReportes extends StatefulWidget {
   State<ScReportes> createState() => _ScReportesState();
 }
 
-final Stream<QuerySnapshot> _ventasRead =
-    FirebaseFirestore.instance.collection('ventas').snapshots();
+final Stream<QuerySnapshot> _ventasRead = FirebaseFirestore.instance
+    .collection('ventas')
+    .orderBy('fecha')
+    .snapshots();
 
 class _ScReportesState extends State<ScReportes> {
   @override
@@ -43,13 +45,13 @@ class _ScReportesState extends State<ScReportes> {
               Timestamp timestamp = data['fecha'] as Timestamp;
               DateTime dateTime = timestamp.toDate();
 
-              var _horaVenta =
+              var horaVenta =
                   'Fecha: ${dateTime.day}/${dateTime.month}/${dateTime.year} Hora: ${dateTime.hour}:${dateTime.minute}:${dateTime.second}';
               return Card(
                 child: Column(children: [
                   ListTile(
                     title: Text('Vendedor: ${data['name']}'),
-                    subtitle: Text('$_horaVenta'),
+                    subtitle: Text('$horaVenta'),
                   ),
                   ListTile(
                     title: Text('Total: \$${data['total']}'),

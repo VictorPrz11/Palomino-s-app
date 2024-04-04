@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart' // new
         PhoneAuthProvider; // new
 import 'package:provider/provider.dart'; // new
 import 'app_state.dart';
-import 'src/authentication.dart'; // new
+import 'authentication.dart'; // new
 // import 'package:hexcolor/hexcolor.dart';
 
 class InicioSesion extends StatelessWidget {

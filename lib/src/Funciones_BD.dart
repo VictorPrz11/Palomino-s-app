@@ -56,11 +56,8 @@ void agregarPlatillo(
   });
 }
 
-CollectionReference platillos =
-    FirebaseFirestore.instance.collection('platillos');
-
 actualizarPlatillo(nombre, precio, descripcion, categoria) {
-  platillos
+  platillosCollection
       .where('nombre', isEqualTo: nombre)
       .get()
       .then((snapshot) {

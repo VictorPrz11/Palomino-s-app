@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:palominos/Pedidos_Funciones/Ventas.dart';
 import 'package:palominos/src/Funciones_BD.dart';
+import 'package:palominos/src/funcion_red.dart';
 
 import 'Clase_Pedido.dart';
 
@@ -12,8 +13,10 @@ class ScPedidos extends StatefulWidget {
   State<ScPedidos> createState() => _ScPedidosState();
 }
 
-final Stream<QuerySnapshot> _pedidosRead =
-    FirebaseFirestore.instance.collection('pedidos').snapshots();
+final Stream<QuerySnapshot> _pedidosRead = FirebaseFirestore.instance
+    .collection('pedidos')
+    .orderBy('fecha')
+    .snapshots();
 
 class _ScPedidosState extends State<ScPedidos> {
   @override
@@ -23,11 +26,28 @@ class _ScPedidosState extends State<ScPedidos> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Ventas(),
-                    )).then((value) => setState(() {}));
+                if (conectividad() != 'Sin conexion') {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Ventas(),
+                      )).then((value) => setState(() {}));
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Error'),
+                      content: const Text('No hay conexion a internet'),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('Cerrar'))
+                      ],
+                    ),
+                  );
+                }
               },
               icon: const Icon(Icons.add))
         ],
@@ -55,14 +75,14 @@ class _ScPedidosState extends State<ScPedidos> {
               Map<String, dynamic> pedido = data['Pedido'];
               Timestamp timestamp = data['fecha'] as Timestamp;
               DateTime dateTime = timestamp.toDate();
-              var _horaPedido =
+              var horaPedido =
                   'Fecha: ${dateTime.day}/${dateTime.month}/${dateTime.year} Hora: ${dateTime.hour}:${dateTime.minute}:${dateTime.second}';
 
               return Card(
                   child: Column(
                 children: [
                   ListTile(
-                    title: Text(_horaPedido +
+                    title: Text(horaPedido +
                         '\n' +
                         pedido.entries
                             .map((e) =>

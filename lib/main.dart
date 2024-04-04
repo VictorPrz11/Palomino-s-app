@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart'; // new
 import 'package:provider/provider.dart'; // new
 
 import 'PantallaPrincipal.dart';
-import 'app_state.dart';
-import 'inicio_sesion.dart'; // new
+import 'src/app_state.dart';
+import 'src/inicio_sesion.dart'; // new
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {

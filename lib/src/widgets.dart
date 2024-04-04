@@ -19,15 +19,18 @@ class Header extends StatelessWidget {
 }
 
 class CamposdeTexto extends StatelessWidget {
-  const CamposdeTexto(this.label, this.controller, this.label2, {super.key});
+  const CamposdeTexto(
+      this.label, this.controller, this.label2, this.TipoTeclado,
+      {super.key});
   final String label2;
   final String label;
   final TextEditingController controller;
-
+  final TextInputType TipoTeclado;
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextFormField(
+          keyboardType: TipoTeclado,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return "Ingrese el valor";

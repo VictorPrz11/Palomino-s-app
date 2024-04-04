@@ -6,7 +6,7 @@ import "package:palominos/Pedidos_Funciones/Pantalla_pedidos.dart";
 import "package:palominos/Reporte_funciones/Pantalla_Reportes.dart";
 
 import "package:palominos/Pedidos_Funciones/Ventas.dart";
-import "package:palominos/seleccionDdeimagenes.dart";
+import "package:palominos/Futuras_funciones/seleccionDdeimagenes.dart";
 import "Platillos_Funciones/Pantalla_Platillos.dart";
 
 class PantallaPrincipal extends StatelessWidget {
@@ -62,9 +62,9 @@ class PantallaPrincipal extends StatelessWidget {
                             title: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                              Image.asset('assets/ventas.png'),
+                              Image.asset('assets/order.png'),
                               const Text(
-                                'Ventas',
+                                'Pedidos',
                               )
                             ])),
                       ),
@@ -94,7 +94,7 @@ class PantallaPrincipal extends StatelessWidget {
                                 child: Image.asset('assets/report.png'),
                               ),
                               const Text(
-                                'Reportes',
+                                'Reportes de ventas',
                               )
                             ])),
                       ),
