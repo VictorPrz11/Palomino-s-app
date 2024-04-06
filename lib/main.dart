@@ -1,22 +1,23 @@
-import 'package:firebase_ui_auth/firebase_ui_auth.dart'; // new
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart'; // new
-import 'package:provider/provider.dart'; // new
+import 'package:go_router/go_router.dart';
+import 'package:palominos/src/funcion_red.dart';
+import 'package:provider/provider.dart';
 
-import 'PantallaPrincipal.dart';
+import 'Pantalla_Principal.dart';
 import 'src/app_state.dart';
-import 'src/inicio_sesion.dart'; // new
+import 'src/inicio_sesion.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  verificarConexion();
   runApp(ChangeNotifierProvider(
     create: (context) => ApplicationState(),
     builder: ((context, child) => const MainApp()),
   ));
 }
 
-// Add GoRouter configuration outside the App class
 final _router = GoRouter(
   routes: [
     GoRoute(
@@ -50,11 +51,12 @@ final _router = GoRouter(
                     user.updateDisplayName(user.email!.split('@')[0]);
                   }
                   if (!user.emailVerified) {
-                    // user.sendEmailVerification();
+                    // user.sendEmailVerification(); -- Este fragmento envia el link para verificar la
+                    // cuenta, pero no se utlizara por el momento
 
                     const snackBar = SnackBar(
                         content: Text(
-                            'Please check your email to verify your email address'));
+                            'Porfavor revisa tu correo para verificar tu cuenta'));
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   }
                   context.pushReplacement('/principal');
@@ -75,18 +77,12 @@ final _router = GoRouter(
             ),
           ],
         ),
-        GoRoute(
-          path: 'profile',
-          builder: (context, state) {
-            return PantallaPrincipal();
-          },
-        ),
       ],
     ),
     GoRoute(
       path: '/principal',
       builder: (context, state) {
-        return PantallaPrincipal();
+        return const PantallaPrincipal();
       },
     ),
   ],

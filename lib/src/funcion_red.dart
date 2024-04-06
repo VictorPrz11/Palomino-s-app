@@ -1,12 +1,12 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-Future<String> conectividad() async {
-  var connectivityResult = await (Connectivity().checkConnectivity());
-  if (connectivityResult == ConnectivityResult.mobile) {
-    return 'conexion mobile';
-  } else if (connectivityResult == ConnectivityResult.wifi) {
-    return 'conexion wifi';
+Future<String> verificarConexion() async {
+  final List<ConnectivityResult> connectivityResult =
+      await (Connectivity().checkConnectivity());
+  if (connectivityResult.contains(ConnectivityResult.mobile) ||
+      connectivityResult.contains(ConnectivityResult.wifi)) {
+    return 'conexion';
   } else {
-    return 'Sin conexion';
+    return 'sin conexion';
   }
 }

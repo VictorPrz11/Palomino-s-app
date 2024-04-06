@@ -2,8 +2,10 @@ import "package:cloud_firestore/cloud_firestore.dart";
 import "package:flutter/material.dart";
 
 import "package:palominos/Platillos_Funciones/CrudPlatillos.dart";
+import "package:palominos/src/widgets.dart";
 
 import "../src/Funciones_BD.dart";
+import "../src/funcion_red.dart";
 
 class Platillos extends StatefulWidget {
   const Platillos({super.key});
@@ -18,33 +20,65 @@ final Stream<QuerySnapshot> _platillosRead =
 class _PlatillosState extends State<Platillos> {
   @override
   Widget build(BuildContext context) {
+    String conexion = '';
+    verificarConexion().then((value) => setState(() {
+          conexion = value;
+        }));
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue[200],
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              )),
+          backgroundColor: Colors.blue,
           actions: [
             IconButton(
-              icon: const Icon(Icons.add),
+              icon: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CrudPlatillos("", "", "", ""),
-                    )).then((value) {
-                  agregarPlatillo(value['nombre'], value['precio'],
-                      value['descripcion'], value['categoria']);
-                  setState(() {});
-                });
+                if (conexion == 'conexion') {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CrudPlatillos("", "", "", ""),
+                      )).then((value) {
+                    agregarPlatillo(value['nombre'], value['precio'],
+                        value['descripcion'], value['categoria']);
+                    setState(() {});
+                  });
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Error'),
+                      content: const Text('No hay conexion a internet'),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('Cerrar'))
+                      ],
+                    ),
+                  );
+                }
               },
             )
           ],
-          title: const Text('Platillos'),
+          title: const Header('Platillos'),
         ),
         body: StreamBuilder<QuerySnapshot>(
           stream: _platillosRead,
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
-              return const Text('Algo salió mal');
+              return const Center(child: Text('Algo salió mal'));
             }
 
             if (snapshot.connectionState == ConnectionState.waiting) {

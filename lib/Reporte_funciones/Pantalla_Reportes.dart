@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:palominos/src/widgets.dart';
 
 class ScReportes extends StatefulWidget {
   const ScReportes({super.key});
@@ -20,7 +21,8 @@ class _ScReportesState extends State<ScReportes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reportes'),
+        backgroundColor: Colors.blue,
+        title: const Header('Reportes'),
       ),
       body: Center(
           child: StreamBuilder<QuerySnapshot>(
@@ -51,17 +53,14 @@ class _ScReportesState extends State<ScReportes> {
                 child: Column(children: [
                   ListTile(
                     title: Text('Vendedor: ${data['name']}'),
-                    subtitle: Text('$horaVenta'),
+                    subtitle: Text(horaVenta),
                   ),
                   ListTile(
                     title: Text('Total: \$${data['total']}'),
                   ),
                   ListTile(
-                    title: Text('Venta:\n' +
-                        venta.entries
-                            .map((e) =>
-                                '${e.key}, precio \$${e.value['precio'].toString()}, cantidad ${e.value['cantidad'].toString()} \n')
-                            .join(', ')),
+                    title: Text(
+                        'Venta:\n${venta.entries.map((e) => '${e.key}, precio \$${e.value['precio'].toString()}, cantidad ${e.value['cantidad'].toString()}').join('\n')}'),
                   ),
                 ]),
               );

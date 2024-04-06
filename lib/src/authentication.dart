@@ -4,9 +4,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:palominos/PantallaPrincipal.dart';
-
-import 'widgets.dart';
 
 class AuthFunc extends StatelessWidget {
   const AuthFunc({
@@ -36,11 +33,11 @@ class AuthFunc extends StatelessWidget {
               child: const Text('Volver a la pantalla principal',
                   style: TextStyle(color: Colors.black, fontSize: 15))),
         ),
-        SizedBox(height: 10), // new
+        const SizedBox(height: 10), // new
         Center(
           child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                fixedSize: Size(200, 50),
+                fixedSize: const Size(200, 50),
               ),
               onPressed: () {
                 !loggedIn ? context.push('/sign-in') : signOut();

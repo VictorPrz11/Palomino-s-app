@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' // new
     hide
@@ -19,7 +20,7 @@ class InicioSesion extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
+          SizedBox(
               height: MediaQuery.of(context).size.height / 3,
               child: Image.asset('assets/Palominos.png')),
           Consumer<ApplicationState>(

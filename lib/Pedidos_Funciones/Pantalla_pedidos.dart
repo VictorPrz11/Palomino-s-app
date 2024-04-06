@@ -4,6 +4,7 @@ import 'package:palominos/Pedidos_Funciones/Ventas.dart';
 import 'package:palominos/src/Funciones_BD.dart';
 import 'package:palominos/src/funcion_red.dart';
 
+import '../src/widgets.dart';
 import 'Clase_Pedido.dart';
 
 class ScPedidos extends StatefulWidget {
@@ -21,16 +22,30 @@ final Stream<QuerySnapshot> _pedidosRead = FirebaseFirestore.instance
 class _ScPedidosState extends State<ScPedidos> {
   @override
   Widget build(BuildContext context) {
+    var conexion = '';
+    verificarConexion().then((value) => setState(() {
+          conexion = value;
+          print(value);
+        }));
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
+        backgroundColor: Colors.blue,
         actions: [
           IconButton(
               onPressed: () {
-                if (conectividad() != 'Sin conexion') {
+                if (conexion == 'conexion') {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Ventas(),
+                        builder: (context) => const Ventas(),
                       )).then((value) => setState(() {}));
                 } else {
                   showDialog(
@@ -49,9 +64,12 @@ class _ScPedidosState extends State<ScPedidos> {
                   );
                 }
               },
-              icon: const Icon(Icons.add))
+              icon: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ))
         ],
-        title: const Text('Pedidos'),
+        title: const Header('Pedidos'),
       ),
       body: Center(
           child: StreamBuilder<QuerySnapshot>(

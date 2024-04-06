@@ -1,12 +1,9 @@
-import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
-import "package:image_picker/image_picker.dart";
+
 import "package:palominos/Pedidos_Funciones/Pantalla_pedidos.dart";
 import "package:palominos/Reporte_funciones/Pantalla_Reportes.dart";
+import "package:palominos/src/widgets.dart";
 
-import "package:palominos/Pedidos_Funciones/Ventas.dart";
-import "package:palominos/Futuras_funciones/seleccionDdeimagenes.dart";
 import "Platillos_Funciones/Pantalla_Platillos.dart";
 
 class PantallaPrincipal extends StatelessWidget {
@@ -16,20 +13,27 @@ class PantallaPrincipal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.restaurant_menu),
+        leading: const Icon(
+          Icons.restaurant_menu,
+          color: Colors.white,
+        ),
         leadingWidth: 100,
-        backgroundColor: Colors.blue[200],
-        title: const Text('Palomino´s'),
+        backgroundColor: Colors.blue,
+        title: const Header(
+          'Palomino´s',
+        ),
       ),
       body: Column(
         children: [
-          Container(
+          SizedBox(
               child: Row(children: [
             Expanded(
                 child: InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Platillos()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Platillos()));
                     },
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.25,

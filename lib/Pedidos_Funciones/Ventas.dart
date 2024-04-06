@@ -20,38 +20,39 @@ class _VentasState extends State<Ventas> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            toolbarHeight: 100,
-            actions: [
-              Text(
-                'Total \$${total.toString()}',
-                style: const TextStyle(fontSize: 20),
+          toolbarHeight: 100,
+          actions: [
+            Text(
+              '\$${total.toString()}',
+              style: const TextStyle(fontSize: 20),
+            ),
+            IconButton(
+                onPressed: () {
+                  busquedaEnBD(buscarController.text);
+                  buscarController.clear();
+                  setState(() {});
+                },
+                icon: const Icon(
+                  Icons.add_box_rounded,
+                  color: Colors.black,
+                ))
+          ],
+          centerTitle: true,
+          title: TextFormField(
+            controller: buscarController,
+            decoration: InputDecoration(
+              fillColor: Colors.grey[300],
+              border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              // hintStyle: const TextStyle(fontSize: 15),
+              hintText: "Buscar",
+              prefixIcon: const Icon(
+                Icons.search,
+                // color: Colors.white,
               ),
-              IconButton(
-                  onPressed: () {
-                    busquedaEnBD(buscarController.text);
-                    buscarController.clear();
-                    setState(() {});
-                  },
-                  icon: const Icon(
-                    Icons.add_box_rounded,
-                    color: Colors.black,
-                  ))
-            ],
-            centerTitle: true,
-            title: SizedBox(
-                height: 80,
-                child: Center(
-                  child: TextField(
-                    controller: buscarController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintStyle: TextStyle(fontSize: 15),
-                      hintTextDirection: TextDirection.ltr,
-                      hintText: "Buscar",
-                      prefixIcon: Icon(Icons.search),
-                    ),
-                  ),
-                ))),
+            ),
+          ),
+        ),
         floatingActionButton: FloatingActionButton.extended(
           label: const Text('Agregar pedido',
               style: TextStyle(color: Colors.white)),
