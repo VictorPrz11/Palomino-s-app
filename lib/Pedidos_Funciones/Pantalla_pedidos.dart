@@ -25,7 +25,6 @@ class _ScPedidosState extends State<ScPedidos> {
     var conexion = '';
     verificarConexion().then((value) => setState(() {
           conexion = value;
-          print(value);
         }));
     return Scaffold(
       appBar: AppBar(

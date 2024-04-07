@@ -48,10 +48,11 @@ final _router = GoRouter(
                     return;
                   }
                   if (state is UserCreated) {
+                    print(user.metadata);
                     user.updateDisplayName(user.email!.split('@')[0]);
                   }
                   if (!user.emailVerified) {
-                    // user.sendEmailVerification(); -- Este fragmento envia el link para verificar la
+                    user.sendEmailVerification(); //-- Este fragmento envia el link para verificar la
                     // cuenta, pero no se utlizara por el momento
 
                     const snackBar = SnackBar(

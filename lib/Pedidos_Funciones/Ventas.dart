@@ -58,21 +58,25 @@ class _VentasState extends State<Ventas> {
               style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.green,
           onPressed: () {
-            Map<String, dynamic> mapa = {};
-            // agregarPedido(ventas, total);
-            ventas.asMap().forEach((index, element) {
-              mapa[element.nombre] = {
-                'nombre': element.nombre,
-                'precio': element.precio,
-                'cantidad': element.cantidad,
-                'descripcion': element.descripcion
-              };
-            });
-            agregarPedido(mapa, total);
-            ventas.clear();
-            total = 0;
-            buscarController.clear();
-            Navigator.pop(context);
+            if (ventas.isNotEmpty) {
+              Map<String, dynamic> mapa = {};
+              // agregarPedido(ventas, total);
+              ventas.asMap().forEach((index, element) {
+                mapa[element.nombre] = {
+                  'nombre': element.nombre,
+                  'precio': element.precio,
+                  'cantidad': element.cantidad,
+                  'descripcion': element.descripcion
+                };
+              });
+              agregarPedido(mapa, total);
+              ventas.clear();
+              total = 0;
+              buscarController.clear();
+              Navigator.pop(context);
+            } else {
+              print('No hay elementos en la lista de ventas');
+            }
           },
           icon: const Icon(Icons.add_to_photos_rounded, color: Colors.white),
         ),
@@ -132,9 +136,12 @@ class _VentasState extends State<Ventas> {
 
   void busquedaEnBD(String plato) {
     for (var i = 0; i < elemento.length; i++) {
-      var dato = elemento[i].nombre.toLowerCase();
-      if (dato == plato.toLowerCase()) {
+      var dato =
+          elemento[i].nombre.toString().split(' ').join('').toLowerCase();
+      print(dato);
+      if (dato == plato.split(' ').join('').toLowerCase()) {
         print('Se encontró el elemento dentro de la lista');
+
         Pedido pedido = Pedido(
           nombre: elemento[i].nombre,
           precio: elemento[i].precio,

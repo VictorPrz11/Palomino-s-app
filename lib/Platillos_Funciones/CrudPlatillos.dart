@@ -21,13 +21,18 @@ class _CrudPlatillosState extends State<CrudPlatillos> {
   final TextEditingController _precio = TextEditingController();
   final TextEditingController _descripcion = TextEditingController();
   final TextEditingController _categoria = TextEditingController();
-
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    // TODO: implement initState
     _nombre.text = widget.nombre;
     _precio.text = widget.precio;
     _descripcion.text = widget.descripcion;
     _categoria.text = widget.categoria;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Agregar Platillo'),
