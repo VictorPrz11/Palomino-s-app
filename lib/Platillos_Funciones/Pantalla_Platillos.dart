@@ -46,7 +46,7 @@ class _PlatillosState extends State<Platillos> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CrudPlatillos("", "", "", ""),
+                        builder: (context) => CrudPlatillos('', '', '', ''),
                       )).then((value) {
                     agregarPlatillo(value['nombre'], value['precio'],
                         value['descripcion'], value['categoria']);
@@ -92,6 +92,7 @@ class _PlatillosState extends State<Platillos> {
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
                 Map<String, dynamic> data =
                     document.data() as Map<String, dynamic>;
+                var id = document.id;
                 return Card(
                     child: Column(
                   children: [
@@ -116,11 +117,13 @@ class _PlatillosState extends State<Platillos> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => CrudPlatillos(
-                                          data["categoria"],
-                                          data["descripcion"],
-                                          data["precio"],
-                                          data["nombre"]))).then((value) {
+                                            data["categoria"],
+                                            data["descripcion"],
+                                            data["precio"],
+                                            data["nombre"],
+                                          ))).then((value) {
                                 actualizarPlatillo(
+                                    id,
                                     value['nombre'],
                                     value['precio'],
                                     value['descripcion'],

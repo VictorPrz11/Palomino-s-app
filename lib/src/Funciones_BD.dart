@@ -56,17 +56,14 @@ void agregarPlatillo(
   });
 }
 
-actualizarPlatillo(nombre, precio, descripcion, categoria) {
+actualizarPlatillo(id, nombre, precio, descripcion, categoria) {
   platillosCollection
-      .where('nombre', isEqualTo: nombre)
-      .get()
-      .then((snapshot) {
-        snapshot.docs.first.reference.update({
-          'nombre': nombre,
-          'precio': precio,
-          'descripcion': descripcion,
-          'categoria': categoria
-        });
+      .doc(id)
+      .update({
+        'nombre': nombre,
+        'precio': precio,
+        'descripcion': descripcion,
+        'categoria': categoria
       })
       .then((value) => print("Platillo actualizado correctamente."))
       .catchError((error) => print("Fallo al actualizar el platillo: $error"));
