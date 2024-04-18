@@ -56,7 +56,7 @@ class PantallaPrincipal extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ScPedidos()));
+                              builder: (context) => const ScReportes()));
                     },
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.25,
@@ -66,9 +66,9 @@ class PantallaPrincipal extends StatelessWidget {
                             title: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                              Image.asset('assets/order.png'),
+                              Image.asset('assets/report.png'),
                               const Text(
-                                'Pedidos',
+                                'Reportes',
                               )
                             ])),
                       ),
@@ -82,7 +82,7 @@ class PantallaPrincipal extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ScReportes()));
+                              builder: (context) => const ScPedidos()));
                     },
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.25,
@@ -95,10 +95,10 @@ class PantallaPrincipal extends StatelessWidget {
                               SizedBox(
                                 height:
                                     MediaQuery.of(context).size.height * 0.15,
-                                child: Image.asset('assets/report.png'),
+                                child: Image.asset('assets/order.png'),
                               ),
                               const Text(
-                                'Reportes de ventas',
+                                'Pedidos',
                               )
                             ])),
                       ),
