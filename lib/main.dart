@@ -8,6 +8,13 @@ import 'Pantalla_Principal.dart';
 import 'src/app_state.dart';
 import 'src/inicio_sesion.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
+class LabelOverrides extends DefaultLocalizations {
+  const LabelOverrides();
+
+  // @override
+  // String get emailInputLabel => 'Ingresa tu email';
+}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
